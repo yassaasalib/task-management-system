@@ -1,4 +1,6 @@
-<div class="form-container">
+<p>task-edit-dialog works!</p>
+<h1 mat-dialog-title>{{ data.task.id ? 'Edit Task' : 'Create Task' }}</h1>
+<div mat-dialog-content>
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
@@ -22,6 +24,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Save Task</button>
+    <button mat-button type="submit">Save</button>
   </form>
 </div>
+    

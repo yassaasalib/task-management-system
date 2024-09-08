@@ -1,16 +1,123 @@
-.task-container 
+
+.container 
+  width: var(--container-width)
+  margin: var(--container-margin)
+
+
+.task-form-section 
+  margin-bottom: 20px
+
+
+.task-sections 
   display: flex
   justify-content: space-between
 
-.task-column 
-  width: 30%
-  padding: 10px
-  background-color: #f9f9f9
-  border-radius: 5px
+
+.task-section 
+  flex: 1
+  margin-right: var(--section-margin-right)
+
+  &:last-child 
+    margin-right: 0
+  
+
+.task-section h2 
+  border-bottom: var(--border-top-width) solid #ccc
+  padding-bottom: var(--section-padding-bottom)
 
 .task-card 
-  padding: 10px
-  margin-bottom: 10px
-  background-color: #ffffff
-  border: 1px solid #ddd
-  border-radius: 5px
+  border-radius: var(--border-radius)
+  box-shadow: var(--box-shadow)
+  background-color: var(--background-color)
+  display: flex
+  flex-direction: column
+  padding: var(--padding)
+  margin-bottom: var(--margin-bottom)
+  border-top: var(--border-top-width) solid transparent // Default border color
+  transition: border-color 0.3s // Smooth transition for border color
+
+  &.ToDo 
+    border-top-color: var(--status-to-do-color)
+  
+
+  &.InProgress 
+    border-top-color: var(--status-in-progress-color)
+  
+
+  &.Done 
+    border-top-color: var(--status-done-color)
+  
+.task-body 
+  padding: var(--task-body-padding)
+
+
+.task-title 
+  font-size: var(--task-title-font-size)
+  margin-bottom: var(--task-title-margin-bottom)
+  border-radius: var(--border-radius)
+  display: inline-block
+  color: var(--font-color)
+  background-color: var(--background-color)
+  text-align: center
+  cursor: pointer
+  border: 1px solid transparent
+  transition: background-color 0.3s, color 0.3s
+
+  &.ToDo 
+    color: var(--status-to-do-color)
+  
+
+  &.InProgress 
+    color: var(--status-in-progress-color)
+  
+
+  &.Done 
+    color: var(--status-done-color)
+  
+
+
+.task-footer 
+  display: flex
+  justify-content: space-between
+  padding: var(--footer-padding)
+
+
+.task-info 
+  display: flex
+  align-items: center
+
+
+.task-actions 
+  display: flex
+
+
+.action-button 
+  border: none
+  cursor: pointer
+  padding: var(--action-button-padding)
+  border-radius: var(--border-radius)
+  margin: 0 0 0 10px
+  font-size: var(--action-button-font-size)
+  font-weight: var(--action-button-font-weight)
+  color: var(--action-button-color)
+
+
+.edit-button 
+  background-color: var(--edit-button-bg)
+
+
+.delete-button 
+  background-color: var(--delete-button-bg)
+
+
+@media (max-width: 1024px) 
+  .task-card-container 
+    grid-template-columns: repeat(2, 1fr)
+  
+
+
+@media (max-width: 768px) 
+  .task-card-container 
+    grid-template-columns: 1fr
+  
+
