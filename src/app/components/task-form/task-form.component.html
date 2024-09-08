@@ -1,1 +1,23 @@
-<p>task-form works!</p>
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" type="text" class="form-control" />
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option value="To Do">To Do</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Save Task</button>
+  </form>
+  

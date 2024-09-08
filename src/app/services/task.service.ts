@@ -21,5 +21,10 @@ export class TaskService {
     return of(this.tasks);
   }
 
-  // Add more methods for adding, updating, and deleting tasks as needed
+  addTask(task: Task): Observable<Task> {
+    task.id = this.tasks.length + 1; // Simple ID assignment
+    this.tasks.push(task);
+    return of(task);
+  }
+
 }
