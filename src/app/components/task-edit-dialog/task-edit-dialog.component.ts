@@ -11,6 +11,7 @@ import { Task } from '../../models/task.model';
 })
 export class TaskEditDialogComponent implements OnInit {
   taskForm!: FormGroup;
+  users: string[] = ['User1', 'User2', 'User3']; // Static list of users
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,8 @@ export class TaskEditDialogComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: [this.data.task.title, Validators.required],
       description: [this.data.task.description],
-      status: [this.data.task.status, Validators.required]
+      status: [this.data.task.status, Validators.required],
+      assignedUser: ['', Validators.required]
     });
   }
 

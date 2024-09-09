@@ -1,22 +1,33 @@
 <div id="task-container">
   <div id="container-header">
     <button mat-raised-button color="primary" id="form-button" (click)="openTaskForm()">Add Task</button>
+    <div id="controls">
+      <!-- User Filter -->
+      <select id="userFilter" (change)="onUserFilterChange($event)">
+        <option value="">All Users</option>
+        <option *ngFor="let user of users" [value]="user">{{ user }}</option>
+      </select>
+  
+      <!-- Sort Arrows -->
+      <button id="sort-asc" (click)="sortTasks('asc')">↑</button>
+      <button id="sort-desc" (click)="sortTasks('desc')">↓</button>
+    </div>
   </div>
 
   <div id="task-sections">
     <div class="task-section">
       <h2>To Do</h2>
-      <app-task-list [status]="'To Do'" #toDoList></app-task-list>
+      <app-task-list [status]="'To Do'" [filterUser]="selectedUser" [sortOrder]="sortOrder"></app-task-list>
     </div>
 
     <div class="task-section">
       <h2>In Progress</h2>
-      <app-task-list [status]="'In Progress'" #inProgressList></app-task-list>
+      <app-task-list [status]="'In Progress'" [filterUser]="selectedUser" [sortOrder]="sortOrder"></app-task-list>
     </div>
 
     <div class="task-section">
       <h2>Done</h2>
-      <app-task-list [status]="'Done'" #doneList></app-task-list>
+      <app-task-list [status]="'Done'" [filterUser]="selectedUser" [sortOrder]="sortOrder"></app-task-list>
     </div>
   </div>
 </div>

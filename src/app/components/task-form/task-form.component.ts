@@ -11,6 +11,7 @@ import { Task } from '../../models/task.model';
 })
 export class TaskFormComponent implements OnInit {
   taskForm!: FormGroup;
+  users: string[] = ['User1', 'User2', 'User3']; // Static list of users
 
   constructor(
     private fb: FormBuilder,
@@ -23,18 +24,36 @@ export class TaskFormComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
-      status: ['To Do', Validators.required]
+      status: ['To Do', Validators.required],
+      assignedUser: ['', Validators.required]
     });
+
+    if (this.data && this.data.task) {
+      this.taskForm.patchValue(this.data.task); // Populate the form if editing a task
+    }
   }
 
   onSubmit() {
     if (this.taskForm.valid) {
-      const newTask: Task = this.taskForm.value;
-      this.taskService.createTask(newTask).subscribe(() => {
-        this.taskForm.reset({ status: 'To Do' });
-        this.taskService.loadTasks();
-        this.dialogRef.close(); // Close the dialog
-      });
+      const newTask: Task = {
+        ...this.taskForm.value,
+        createdAt: new Date() // Add creation time
+      };
+
+      if (this.data && this.data.task) {
+        // Update existing task
+        this.taskService.updateTask({ ...this.data.task, ...newTask }).subscribe(() => {
+          this.taskService.loadTasks();
+          this.dialogRef.close(); // Close the dialog
+        });
+      } else {
+        // Create new task
+        this.taskService.createTask(newTask).subscribe(() => {
+          this.taskForm.reset({ status: 'To Do' });
+          this.taskService.loadTasks();
+          this.dialogRef.close(); // Close the dialog
+        });
+      }
     }
   }
 }

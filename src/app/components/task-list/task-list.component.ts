@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,22 +9,45 @@ import { TaskEditDialogComponent } from '../task-edit-dialog/task-edit-dialog.co
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.sass']
 })
-export class TaskListComponent implements OnInit {
-  @Input() status: string = '';
+export class TaskListComponent implements OnInit, OnChanges {
+  @Input() status: string = ''; // Accepts 'To Do', 'In Progress', 'Done'
+  @Input() filterUser: string | null = null; // Accepts the selected user for filtering
+  @Input() sortOrder: 'asc' | 'desc' = 'asc'; // Accepts sort order ('asc' or 'desc')
+
   tasks: Task[] = [];
   loading: boolean = true;
 
   constructor(private taskService: TaskService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(tasks => {
-      this.tasks = tasks.filter(task => task.status === this.status);
-    });
-    setTimeout(() => {
-      this.loading = false; // Simulate data loading completion
-    }, 1000);  
+    this.loadTasks();
   }
-  
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['filterUser'] || changes['sortOrder']) {
+      this.loadTasks();
+    }
+  }
+
+  loadTasks(): void {
+    this.loading = true;
+    this.taskService.getTasks().subscribe(tasks => {
+      let filteredTasks = tasks.filter(task => task.status === this.status);
+      
+      if (this.filterUser) {
+        filteredTasks = filteredTasks.filter(task => task.assignedUser === this.filterUser);
+      }
+
+      if (this.sortOrder === 'asc') {
+        filteredTasks.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+      } else {
+        filteredTasks.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      }
+
+      this.tasks = filteredTasks;
+      this.loading = false;
+    });
+  }
 
   editTask(task: Task) {
     const dialogRef = this.dialog.open(TaskEditDialogComponent, {
@@ -44,6 +67,7 @@ export class TaskListComponent implements OnInit {
       this.taskService.loadTasks();
     });
   }
+
   getCategoryClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'done':
@@ -56,5 +80,4 @@ export class TaskListComponent implements OnInit {
         return '';
     }
   }
-
 }

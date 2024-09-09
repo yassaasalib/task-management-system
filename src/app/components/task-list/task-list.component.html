@@ -1,6 +1,6 @@
 <div *ngIf="loading" id="task-card-container">
   <app-skeleton-loader></app-skeleton-loader>
-</div>
+</div>  
 
 <div *ngIf="!loading" id="task-card-container">
   <div *ngFor="let task of tasks" class="task-card" [ngClass]="getCategoryClass(task.status)">
@@ -16,6 +16,8 @@
       </div>
     </div>
     <p>{{ task.description }}</p>
+    <p><strong>Assigned to:</strong> {{ task.assignedUser }}</p>
+    <p><strong>Created at:</strong> {{ task.createdAt | date:'short' }}</p>
     <div id="task-footer">
       <button id="details-button">Details</button>
       <div id="footer-right">
