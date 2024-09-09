@@ -19,9 +19,12 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getTasks().subscribe(tasks => {
       this.tasks = tasks.filter(task => task.status === this.status);
-      this.loading = false;
     });
+    setTimeout(() => {
+      this.loading = false; // Simulate data loading completion
+    }, 1000);  
   }
+  
 
   editTask(task: Task) {
     const dialogRef = this.dialog.open(TaskEditDialogComponent, {
