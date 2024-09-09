@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
@@ -11,7 +12,12 @@ import { Task } from '../../models/task.model';
 export class TaskFormComponent implements OnInit {
   taskForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) {}
+  constructor(
+    private fb: FormBuilder,
+    private taskService: TaskService,
+    private dialogRef: MatDialogRef<TaskFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
@@ -27,6 +33,7 @@ export class TaskFormComponent implements OnInit {
       this.taskService.createTask(newTask).subscribe(() => {
         this.taskForm.reset({ status: 'To Do' });
         this.taskService.loadTasks();
+        this.dialogRef.close(); // Close the dialog
       });
     }
   }

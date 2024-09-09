@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="task-form-section">
-    <app-task-form></app-task-form>
+<div id="task-container">
+  <div id="container-header">
+    <button mat-raised-button color="primary" id="form-button" (click)="openTaskForm()">Add Task</button>
   </div>
 
-  <div class="task-sections">
+  <div id="task-sections">
     <div class="task-section">
       <h2>To Do</h2>
       <app-task-list [status]="'To Do'" #toDoList></app-task-list>
