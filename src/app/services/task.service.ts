@@ -21,6 +21,7 @@ export class TaskService {
       this.tasksSubject.next(tasks);  // Emit the new tasks array to subscribers
     });
   }
+  
 
   // Function to get the tasks as an Observable
   getTasks(): Observable<Task[]> {

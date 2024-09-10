@@ -3,6 +3,7 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskEditDialogComponent } from '../task-edit-dialog/task-edit-dialog.component';
+import { TaskDetailsComponent } from '../task-details/task-details.component';
 
 @Component({
 	selector: 'app-task-list',
@@ -51,6 +52,13 @@ export class TaskListComponent implements OnInit, OnChanges {
 			}, 1000);  
 		 });
 	}
+	
+	openTaskDetails(task: Task) {
+		this.dialog.open(TaskDetailsComponent, {
+		  width: '600px',
+		  data: { task }
+		});
+	  }
 
 	editTask(task: Task) {
 		const dialogRef = this.dialog.open(TaskEditDialogComponent, {

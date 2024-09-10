@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-loader.component';
+import { TaskDetailsComponent } from './components/task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SkeletonLoaderComponent } from './components/skeleton-loader/skeleton-l
     TaskFormComponent,
     FilterSortComponent,
     TaskEditDialogComponent,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

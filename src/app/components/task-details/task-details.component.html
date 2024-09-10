@@ -1,0 +1,25 @@
+<!-- <div *ngIf="task">
+    <p><strong>Title:</strong> {{ task.title }}</p>
+    <p><strong>Description:</strong> {{ task.description }}</p>
+    <p><strong>Assigned to:</strong> {{ task.assignedUser }}</p>
+    <p><strong>Created at:</strong> {{ task.createdAt | date:'short' }}</p>
+  </div>
+  <div *ngIf="!task">
+    <p>Loading task details...</p>
+  </div>
+   -->
+
+   <div class="task-details-container">
+    <button class="close-button" (click)="closeDialog()">
+      <i class="bi bi-x"></i>
+    </button>
+    <h2>Task Details</h2>
+    <div class="details-content">
+      <p><strong>Title:</strong> {{ task.title }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Assigned to:</strong> {{ task.assignedUser }}</p>
+      <p><strong>Created at:</strong> {{ task.createdAt | date:'short' }}</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+  </div>
+  
