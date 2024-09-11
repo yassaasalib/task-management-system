@@ -1,27 +1,35 @@
-# TaskManagementSystem2
+# Task Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
+This project is a simple task management application built with Angular. It allows users to create, edit, delete, filter, and sort tasks. The application interacts with a fake API using JSON Server and includes features like a skeleton loader during API calls, a detailed view of individual tasks, and a responsive UI.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Task List:** Display tasks with Title, Description, Status, Assigned User, and Creation Time.
+- **Task Operations:** Create new tasks, edit existing tasks, and delete tasks.
+- **Filtering & Sorting:** Filter tasks by user and sort tasks by creation date.
+- **Detailed Task View:** View more detailed information about each task.
+- **API Integration:** Fetch tasks from a fake API (using JSON Server) with simulated delays.
+- **Skeleton Loader:** Show loading indicators while fetching data.
+- **Responsive Design:** The application is responsive and user-friendly across various devices.
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Clone the Repository:
+`git clone https://github.com/yassaasalib/task-management-system`
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Install Dependencies
+`cd task-management-system`
+`npm install`
 
-## Running unit tests
+## Run the Development Server
+`ng serve`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The application will be available at http://localhost:4200/.
 
-## Running end-to-end tests
+## JSON Server Setup
+To simulate a backend API, this project uses JSON Server.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+`json-server --watch db.json --port 3000`
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This will start a JSON Server instance on port 3000, serving your task data.
